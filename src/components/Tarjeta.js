@@ -8,22 +8,23 @@ import { CardActionArea } from "@mui/material";
 const Tarjeta = ({ datos }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          image="https://via.placeholder.com/200"
-          alt="Foto"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      {datos.map(personaje =>
+         <CardActionArea>
+          <CardMedia
+            component="img"
+            image={personaje.image}
+            alt="Foto"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {personaje.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {personaje.gender}
+            </Typography>
+          </CardContent>
+        </CardActionArea>)
+      },
     </Card>
   );
 };

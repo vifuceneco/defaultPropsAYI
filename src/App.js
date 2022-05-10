@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <h1>soy la app</h1>
-      <Tarjeta datos={respuestaAPI} />
+      <Tarjeta datos={respuestaAPI.data.results} />
     </div>
   );
 }
