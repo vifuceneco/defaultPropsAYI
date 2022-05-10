@@ -17,7 +17,7 @@ function App() {
 
     consultaAPI();
   }, []);
-  //console.log(respuestaAPI.data);
+  console.log(respuestaAPI.data.results);
 
   return (
     <div className="App">

@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 const Tarjeta = ({ datos }) => {
-  console.log(datos.data["results"]);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
