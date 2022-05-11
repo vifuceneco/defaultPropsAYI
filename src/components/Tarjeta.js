@@ -1,37 +1,54 @@
-import React, { useEffect, useState } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import React, { useState } from "react";
+import { Card, CardActionArea, CardContent, CardMedia, List, ListItem, Typography } from "@mui/material";
+import PlaceHolder from "../assets/placeholder.png";
 
-const Tarjeta = ({ datos }) => {
-  const [personajes, setPersonajes] = useState([]);
+const Tarjeta = ({id, name, gender, image, location, origin, species, status }) => {
 
-  useEffect(() => {
-    setPersonajes(datos);
-  }, [datos]);
+  const [active, setActive] = useState(false);
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      {personajes !== undefined && personajes.length
-        ? personajes.map((personaje, index) => (
-            <CardActionArea key={index}>
-              <CardMedia component="img" image={personaje.image} alt="Foto" />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {personaje.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {personaje.gender}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          ))
-        : "Loading..."}
-      ,
+    <Card sx={{ width: 250 }}>
+      <CardActionArea onClick={() => setActive(!active)}>
+        <CardMedia
+          component="img"
+          height="300"
+          image={image}
+          alt={name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {name} ({status})
+          </Typography>
+          {
+            active && (
+              <Typography variant="body2" color="text.secondary">
+                <List>
+                  <ListItem>
+                    Genero: {gender}
+                  </ListItem>
+                  <ListItem>
+                    Ubicación: {location.name}
+                  </ListItem>
+                  <ListItem>
+                    Origen: {origin.name}
+                  </ListItem>
+                  <ListItem>
+                    Especie: {species}
+                  </ListItem>
+                </List>
+              </Typography>
+            )
+          }
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 };
+
+Tarjeta.defaultProps = {
+  name: "Nombre misterioso",
+  gender: "Género desconocido",
+  image: PlaceHolder,
+}
 
 export default Tarjeta;
