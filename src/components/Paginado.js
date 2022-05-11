@@ -3,34 +3,28 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const Paginado = ({
-  charactersPerPage,
-  totalCharacters,
+  count,
   setCurrentPage,
   currentPage,
 }) => {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalCharacters / charactersPerPage); i++) {
-    pageNumbers.push(i);
-  }
-  const handleChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
   return (
-    <div>
-      <Stack spacing={2}>
-        <Pagination
-          count={pageNumbers.length}
-          variant="outlined"
-          color="primary"
-          size="large"
-          page={currentPage}
-          onChange={handleChange}
-        />
-      </Stack>
-    </div>
+    <Stack spacing={2}>
+      <Pagination
+        count={count}
+        variant="outlined"
+        color="primary"
+        size="large"
+        page={currentPage}
+        onChange={(e, value) => setCurrentPage(value)}
+      />
+    </Stack>
   );
 };
+
+Paginado.defaultProps = {
+  count: 0,
+  currentPage: 1,
+  setCurrentPage: () => {},
+}
 
 export default Paginado;

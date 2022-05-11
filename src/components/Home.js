@@ -5,40 +5,31 @@ import Paginado from "./Paginado";
 
 const Home = () => {
   const [results, setResults] = useState([]);
+  const [maxPages, setMaxPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
+    fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}`)
       .then((response) => response.json())
-      .then((data) => setResults(data.results));
-  }, []);
+      .then((data) => {
+        setMaxPages(data.info.pages);
+        setResults(data.results);
+      });
+  }, [currentPage]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const charactersPerPage = 8;
-  const indexOfLastCharacter = charactersPerPage * currentPage;
-  const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
-  const currentCharacters = results.slice(
-    indexOfFirstCharacter,
-    indexOfLastCharacter
-  );
-
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
   return (
     <>
       <h1>Las mejores tarjetas de personaje ✨</h1>
       <Grid container spacing={2}>
-        {currentCharacters.map((personaje, index) => (
-          <Grid key={index} item>
+        {results.map((personaje) => (
+          <Grid key={personaje.id} item>
             <Tarjeta {...personaje} />
           </Grid>
         ))}
       </Grid>
       <Box sx={{ marginLeft: 50, marginTop: 10, marginBottom: 5 }}>
         <Paginado
-          charactersPerPage={charactersPerPage}
-          totalCharacters={results.length}
-          paginado={paginado}
+          count={maxPages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
