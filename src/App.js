@@ -8,21 +8,21 @@ function App() {
 
   useEffect(() => {
     const consultaAPI = async () => {
-      const consulta = await axios.get(
-        "https://rickandmortyapi.com/api/character"
-      );
+      await fetch("https://rickandmortyapi.com/api/character")
+        .then((r) => r.json())
+        .then((r) => setRespuestaAPI(r));
 
-      setRespuestaAPI(consulta);
+      //setRespuestaAPI(consulta.json());
     };
 
     consultaAPI();
   }, []);
-  console.log(respuestaAPI.data.results);
+  //console.log(respuestaAPI);
 
   return (
     <div className="App">
       <h1>soy la app</h1>
-      <Tarjeta datos={respuestaAPI.data.results} />
+      <Tarjeta datos={respuestaAPI.results} />
     </div>
   );
 }
