@@ -21,13 +21,8 @@ function App() {
 
   return (
     <div className="App">
-<<<<<<< HEAD
-      <h1>soy la app</h1>
-      <Tarjeta datos={respuestaAPI.results} />
-=======
       <h1>Las mejores tarjetas de personaje ✨</h1>
-      <Tarjeta datos={respuestaAPI.data.results} />
->>>>>>> 15cf60d5d3dce9cc0caccf8d6f1da30835fa7f0c
+      <Tarjeta datos={respuestaAPI.results} />
     </div>
   );
 }
