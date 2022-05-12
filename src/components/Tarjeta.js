@@ -1,44 +1,50 @@
 import React, { useState } from "react";
-import { Card, CardActionArea, CardContent, CardMedia, List, ListItem, Typography } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  List,
+  ListItem,
+  Typography,
+} from "@mui/material";
 import PlaceHolder from "../assets/placeholder.png";
 
-const Tarjeta = ({id, name, gender, image, location, origin, species, status }) => {
-
+const Tarjeta = ({
+  id,
+  name,
+  gender,
+  image,
+  location,
+  origin,
+  species,
+  status,
+}) => {
   const [active, setActive] = useState(false);
 
   return (
     <Card sx={{ width: 250 }}>
       <CardActionArea onClick={() => setActive(!active)}>
-        <CardMedia
-          component="img"
-          height="300"
-          image={image}
-          alt={name}
-        />
+        <CardMedia component="img" height="300" image={image} alt={name} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2" sx={{ minHeight: 65 }}>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            sx={{ minHeight: 65 }}
+          >
             {name} ({status})
           </Typography>
-          {
-            active && (
-              <Typography variant="body2" color="text.secondary">
-                <List>
-                  <ListItem>
-                    Genero: {gender}
-                  </ListItem>
-                  <ListItem>
-                    Ubicación: {location.name}
-                  </ListItem>
-                  <ListItem>
-                    Origen: {origin.name}
-                  </ListItem>
-                  <ListItem>
-                    Especie: {species}
-                  </ListItem>
-                </List>
-              </Typography>
-            )
-          }
+          {active && (
+            <Typography variant="body2" color="text.secondary">
+              <List>
+                <ListItem>Genero: {gender}</ListItem>
+                <ListItem>Ubicación: {location.name}</ListItem>
+                <ListItem>Origen: {origin.name}</ListItem>
+                <ListItem>Especie: {species}</ListItem>
+              </List>
+            </Typography>
+          )}
         </CardContent>
       </CardActionArea>
     </Card>
@@ -46,9 +52,13 @@ const Tarjeta = ({id, name, gender, image, location, origin, species, status }) 
 };
 
 Tarjeta.defaultProps = {
+  id: Math.ceil(Math.random() * 90000000),
   name: "Nombre misterioso",
   gender: "Género desconocido",
   image: PlaceHolder,
-}
+  species: "desconocido",
+  origin: { name: "alguna parte" },
+  location: { name: "ni idea" },
+};
 
 export default Tarjeta;

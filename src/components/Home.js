@@ -14,6 +14,21 @@ const Home = () => {
       .then((data) => {
         setMaxPages(data.info.pages);
         setResults(data.results);
+        return data.results;
+      })
+      .then((response) => {
+        currentPage === 42 &&
+          setResults([
+            ...response,
+            {
+              image:
+                "https://www.hola.com/imagenes/mascotas/20200911175064/gatos-imagenes-curiosidades/0-864-5/gato-egipcio-a.webp?filter=high",
+              //name: "Pedro",
+              status: "Alive",
+              species: "Cat",
+              gender: "Male",
+            },
+          ]);
       });
   }, [currentPage]);
 
